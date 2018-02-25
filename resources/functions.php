@@ -11,3 +11,16 @@ if ($connection) {
 } else {
     echo "not connected";
 }
+
+
+
+funtion redirect($location) {
+    header("Location: $location");
+}
+
+
+function query($sql) {
+    //if you want to use the connection inside the function make it global..
+    global $connection;
+    return mysqli_query($connection, $sql);
+}
