@@ -82,8 +82,7 @@ function get_products()
                                 </h4>
                                 <p>test</p>
                                 <a class="btn btn-primary" target="_blank"
-                                   href="#">View
-                                    Tutorial</a>
+                                   href="cart.php?add={$row['product_id']}">Add to cart</a>
                             </div>
 
                         </div>
@@ -193,8 +192,6 @@ function send_message()
             set_message("your message has been sent");
             redirect("contact.php");
         }
-
-
     }
 }
 

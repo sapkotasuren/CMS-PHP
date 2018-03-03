@@ -2,9 +2,8 @@
 
 //allows you to keep the content in a server-side buffer until you are ready to display it.
 ob_start();
-
 session_start();
-
+//session_destroy();
 
 //defined() checks whether the constant is defined or not, we are using this for the purpose to be sure that we did not declare same constant somewhere else.
 defined("DS") ? null : define("DS", DIRECTORY_SEPARATOR);
