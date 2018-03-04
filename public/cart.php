@@ -1,6 +1,4 @@
 <?php require_once("../resources/config.php"); ?>
-
-
 <?php
 
 if (isset($_GET['add'])) {
@@ -52,20 +50,15 @@ function cart()
     $item_number = 1;
     $amount = 1;
     $item_quantity = 1;
-
     foreach ($_SESSION as $name => $value) {
         if ($value > 0) {
             if (substr($name, 0, 8) == "product_") {
-
                 $length = strlen($name) - 8;
                 $id = substr($name, 8, $length);
-
                 $query = query("SELECT * FROM products WHERE product_id = " . escape_string($id) . " ");
                 confirm($query);
-
                 while ($row = mysqli_fetch_array($query)) {
                     $sub = $row['product_price'] * $value;
-
                     $product = <<<DELIMETER
  <tr>
                 <td>{$row['product_title']}</td>
@@ -82,25 +75,17 @@ function cart()
   <input type="hidden" name="item_number_{$item_number}" value="{$row['product_id']}">
   <input type="hidden" name="amount_{$amount}" value="{$row['product_price']}">
   <input type="hidden" name="quantity_{$item_quantity}" value="{$value}">
-
 DELIMETER;
                     echo $product;
-
                     $item_name++;
                     $item_number++;
                     $amount++;
                     $item_quantity++;
-
                     $_SESSION['item_total'] = $total += $sub;
                     $_SESSION['item_quantity'] = $quantity += $value;
-
                 }
-
             }
-
         }
-
-
     }
 }
 

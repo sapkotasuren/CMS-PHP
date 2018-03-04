@@ -84,7 +84,6 @@ function get_products()
                                 <a class="btn btn-primary" target="_blank"
                                    href="cart.php?add={$row['product_id']}">Add to cart</a>
                             </div>
-
                         </div>
                     </div>
 DELIMETER;
@@ -165,7 +164,7 @@ function login_user()
             set_message("Your username or password is wrong");
             redirect("login.php");
         } else {
-            set_message("Welcome to Admin Panel {$username}");
+            $_SESSION['username']= $username;
             redirect("admin");
         }
     }

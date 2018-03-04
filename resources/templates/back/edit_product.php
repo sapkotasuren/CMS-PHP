@@ -12,16 +12,16 @@
     <title>SB Admin - Bootstrap Admin Template</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../public/admin/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="../../../public/admin/css/sb-admin.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="css/plugins/morris.css" rel="stylesheet">
+    <link href="../../../public/admin/css/plugins/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../../../public/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -93,55 +93,124 @@
             <div class="container-fluid">
 
 
-                
 
 
-        <div class="col-md-12">
+
+
+<div class="col-md-12">
+
 <div class="row">
 <h1 class="page-header">
-   All Orders
+   Add Product
 
 </h1>
 </div>
+               
 
-<div class="row">
-<table class="table table-hover">
-    <thead>
 
-      <tr>
-           <th>S.N</th>
-           <th>Title</th>
-           <th>Photo</th>
-           <th>Quantity</th>
-           <th>Invoice Number</th>
-           <th>Order Date</th>
-           <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>21</td>
-            <td>Nikon 234</td>
+<form action="" method="post" enctype="multipart/form-data">
 
-            <td><img src="http://placehold.it/62x62" alt=""></td>
-            <td>Cameras</td>
-            <td>456464</td>
-            <td>Jun 2039</td>
-           <td>Completed</td>
-        </tr>
-        
 
-    </tbody>
-</table>
+<div class="col-md-8">
+
+<div class="form-group">
+    <label for="product-title">Product Title </label>
+        <input type="text" name="product_title" class="form-control">
+       
+    </div>
+
+
+    <div class="form-group">
+           <label for="product-title">Product Description</label>
+      <textarea name="product_description" id="" cols="30" rows="10" class="form-control"></textarea>
+    </div>
+
+
+
+    <div class="form-group row">
+
+      <div class="col-xs-3">
+        <label for="product-price">Product Price</label>
+        <input type="number" name="product_price" class="form-control" size="60">
+      </div>
+    </div>
+
+
+
+
+    
+    
+
+</div><!--Main Content-->
+
+
+<!-- SIDEBAR-->
+
+
+<aside id="admin_sidebar" class="col-md-4">
+
+     
+     <div class="form-group">
+       <input type="submit" name="draft" class="btn btn-warning btn-lg" value="Draft">
+        <input type="submit" name="publish" class="btn btn-primary btn-lg" value="Publish">
+    </div>
+
+
+     <!-- Product Categories-->
+
+    <div class="form-group">
+         <label for="product-title">Product Category</label>
+          <hr>
+        <select name="product_category" id="" class="form-control">
+            <option value="">Select Category</option>
+           
+        </select>
+
+
 </div>
 
 
 
 
 
+    <!-- Product Brands-->
+
+
+    <div class="form-group">
+      <label for="product-title">Product Brand</label>
+         <select name="product_brand" id="" class="form-control">
+            <option value="">Select Brand</option>
+         </select>
+    </div>
+
+
+<!-- Product Tags -->
+
+
+    <div class="form-group">
+          <label for="product-title">Product Keywords</label>
+          <hr>
+        <input type="text" name="product_tags" class="form-control">
+    </div>
+
+    <!-- Product Image -->
+    <div class="form-group">
+        <label for="product-title">Product Image</label>
+        <input type="file" name="file">
+      
+    </div>
 
 
 
+</aside><!--SIDEBAR-->
+
+
+    
+</form>
+
+
+
+                
 
 
 
@@ -155,15 +224,15 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="../../../public/admin/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../../../public/admin/js/bootstrap.min.js"></script>
 
     <!-- Morris Charts JavaScript -->
-    <script src="js/plugins/morris/raphael.min.js"></script>
-    <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>
+    <script src="../../../public/admin/js/plugins/morris/raphael.min.js"></script>
+    <script src="../../../public/admin/js/plugins/morris/morris.min.js"></script>
+    <script src="../../../public/admin/js/plugins/morris/morris-data.js"></script>
 
 </body>
 
