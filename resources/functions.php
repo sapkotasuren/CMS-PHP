@@ -1,4 +1,11 @@
 <?php
+
+function last_id(){
+    global $connection;
+    return mysqli_insert_id($connection);
+}
+
+
 /**
  * Created by PhpStorm.
  * User: suren

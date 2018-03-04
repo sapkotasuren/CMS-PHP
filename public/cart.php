@@ -106,4 +106,62 @@ DELIMETER;
 }
 
 
+
+
+
+
+
+function report()
+{
+
+if(isset($_GET['tx'])) {
+    $amount = $_GET['amt'];
+    $currency = $_GET['cc'];
+    $transaction = $_GET['tx'];
+    $status = $_GET['st'];
+
+
+    $send_order = query("INSERT INTO orders 
+(order_amount,order_transaction, order_status,order_currency)
+VALUES ('{$amount}','{$transaction}','{$status}','{$currency}')");
+
+    $last_id = last_id();
+    confirm($send_order);
+    session_destroy();
+}else {
+    redirect("index.php");
+}
+
+    $total = 0;
+    $item_quantity = 0;
+    foreach ($_SESSION as $name => $value) {
+        if ($value > 0) {
+            if (substr($name, 0, 8) == "product_") {
+                $length = strlen($name) - 8;
+                $id = substr($name, 8, $length);
+
+                
+
+
+
+                $query = query("SELECT * FROM products WHERE product_id = " . escape_string($id) . " ");
+                confirm($query);
+                while ($row = mysqli_fetch_array($query)) {
+                    $product_price = $row['product_price'];
+                    $product_quantity = $row['product_quantity'];
+                    $product_title = $row['product_title'];
+                    $sub = $row['product_price'] * $value;
+                    $item_quantity+=$value;
+
+                    $insert_report = query("INSERT INTO reports(product_id,order_id, product_price,product_title,product_quantity)VALUES('{$id}','{$last_id}','{$product_price}','{$product_title}','{$product_quantity}')");
+                    confirm($insert_report);
+                }
+                $total += $sub;
+                echo $item_quantity;
+            }
+        }
+    }
+}
+
+
 ?>
