@@ -91,7 +91,7 @@ DELIMETER;
 
 function show_paypal()
 {
-    if (isset($_SESSION['item_quantity'])&& $_SESSION["item_quantity"] != 0) {
+    if (isset($_SESSION['item_quantity']) && $_SESSION["item_quantity"] != 0) {
 
         $paypal_buutton = <<<DELIMETER
 <input type="image" name="upload"
@@ -106,61 +106,54 @@ DELIMETER;
 }
 
 
-
-
-
-
-
 function report()
 {
 
-if(isset($_GET['tx'])) {
-    $amount = $_GET['amt'];
-    $currency = $_GET['cc'];
-    $transaction = $_GET['tx'];
-    $status = $_GET['st'];
+    if (isset($_GET['tx'])) {
+        $amount = $_GET['amt'];
+        $currency = $_GET['cc'];
+        $transaction = $_GET['tx'];
+        $status = $_GET['st'];
 
+        $total = 0;
+        $item_quantity = 0;
 
-    $send_order = query("INSERT INTO orders 
+        foreach ($_SESSION as $name => $value) {
+            if ($value > 0) {
+                if (substr($name, 0, 8) == "product_") {
+                    $length = strlen($name) - 8;
+                    $id = substr($name, 8, $length);
+
+                    $send_order = query("INSERT INTO orders 
 (order_amount,order_transaction, order_status,order_currency)
 VALUES ('{$amount}','{$transaction}','{$status}','{$currency}')");
 
-    $last_id = last_id();
-    confirm($send_order);
-    session_destroy();
-}else {
-    redirect("index.php");
-}
-
-    $total = 0;
-    $item_quantity = 0;
-    foreach ($_SESSION as $name => $value) {
-        if ($value > 0) {
-            if (substr($name, 0, 8) == "product_") {
-                $length = strlen($name) - 8;
-                $id = substr($name, 8, $length);
-
-                
+                    $last_id = last_id();
+                    confirm($send_order);
 
 
+                    $query = query("SELECT * FROM products WHERE product_id = " . escape_string($id) . " ");
+                    confirm($query);
+                    while ($row = mysqli_fetch_array($query)) {
+                        $product_price = $row['product_price'];
+                        $product_quantity = $row['product_quantity'];
+                        $product_title = $row['product_title'];
+                        $sub = $row['product_price'] * $value;
+                        $item_quantity += $value;
 
-                $query = query("SELECT * FROM products WHERE product_id = " . escape_string($id) . " ");
-                confirm($query);
-                while ($row = mysqli_fetch_array($query)) {
-                    $product_price = $row['product_price'];
-                    $product_quantity = $row['product_quantity'];
-                    $product_title = $row['product_title'];
-                    $sub = $row['product_price'] * $value;
-                    $item_quantity+=$value;
-
-                    $insert_report = query("INSERT INTO reports(product_id,order_id, product_price,product_title,product_quantity)VALUES('{$id}','{$last_id}','{$product_price}','{$product_title}','{$product_quantity}')");
-                    confirm($insert_report);
+                        $insert_report = query("INSERT INTO reports(product_id,order_id, product_price,product_title,product_quantity)VALUES('{$id}','{$last_id}','{$product_price}','{$product_title}','{$product_quantity}')");
+                        confirm($insert_report);
+                    }
+                    $total += $sub;
+                    echo $item_quantity;
                 }
-                $total += $sub;
-                echo $item_quantity;
             }
         }
+    session_destroy();
+    } else {
+        redirect("index.php");
     }
+
 }
 
 
